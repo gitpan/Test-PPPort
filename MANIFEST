@@ -20,8 +20,10 @@ t/00_compile.t
 t/01_fail.t
 t/02_notfound.t
 t/03_success.t
+t/04_no_input_file.t
 t/sandbox/fail/fail.xs
 t/sandbox/fail/ppport.h
+t/sandbox/no_input_file/ppport.h
 t/sandbox/success/ppport.h
 t/sandbox/success/success.xs
 xt/01_podspell.t

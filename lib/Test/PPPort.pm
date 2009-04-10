@@ -1,7 +1,7 @@
 package Test::PPPort;
 use strict;
 use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Test::Builder;
 
@@ -26,14 +26,18 @@ sub ppport_ok {
         return;
     }
 
-    $Test->plan( tests => 1 );
-
-    my $result = `$^X ppport.h`;
-    if ($result =~ /Looks good/) {
-        $Test->ok( 1, "$^X ppport.h");
+    my $cmd = "$^X ppport.h";
+    my @result = `$cmd 2>&1`;
+    if ($result[0] =~ /^No input files given/) {
+        $Test->skip_all( "No such XS files");
     } else {
-        $Test->ok( 0, "$^X ppport.h");
-        $Test->diag("\nppport.h result:\n$result\n");
+        $Test->plan( tests => 1 );
+        if ($result[-1] =~ /^Looks good/) {
+            $Test->ok( 1, $cmd);
+        } else {
+            $Test->ok( 0, $cmd);
+            $Test->diag("\nppport.h result:\n@result\n");
+        }
     }
 }
 
