@@ -1,11 +1,11 @@
 package Test::PPPort;
 use strict;
 use warnings;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
-use Test::Builder;
+require Test::More;
 
-my $Test = Test::Builder->new;
+my $Test = Test::More->builder;
 
 sub import {
     my $self   = shift;
